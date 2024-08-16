@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Application</title>
+  </head>
+  <style>
+    .row {
+      margin: 10px;
+      padding: 15px;
+    }
+    .table,th,td
+    {
+        border:2px red;
+        background-color:aqua;
+    }
+  </style>
+  <body>
+    <center>
+      <h1>Django Web App</h1>
+    </center>
+    <form action="{% url 'index' %}" method="POST">
+      {% csrf_token %}
+      <div class="row">
+        <label>Name</label>
+        <input type="text" name="name" placeholder="Enter Your Name" required />
+      </div>
+      <div class="row">
+        <label>Hall Ticket No</label>
+        <input
+          type="text"
+          name="htno"
+          placeholder="Enter Your Htno"
+          maxlength="10"
+          required
+        />
+      </div>
+      <div class="row">
+        <label>Year</label>
+        <input
+          type="text"
+          name="year"
+          placeholder="Enter Your Year of Study"
+          required
+        />
+      </div>
+      <div class="row">
+        <label>Branch</label>
+        <input
+          type="text"
+          name="branch"
+          placeholder="Enter Your Branch"
+          required
+        />
+      </div>
+
+      <div class="row">
+        <button type="submit">Submit</button>
+      </div>
+      <div class="row">
+        <caption>
+          Student Details
+        </caption>
+        <table>
+          <tr>
+            <th>Ht No</th>
+            <th>Name</th>
+            <th>Year</th>
+            <th>Branch</th>
+            <th>Action</th>
+          </tr>
+          {% for student in student_data %}
+          <tr>
+            <td>{{ student.hallticket_no }}</td>
+            <td>{{ student.name }}</td>
+            <td>{{ student.year}}</td>
+            <td>{{ student.branch }}</td>
+            <td>
+                <a href="{% url 'update' student.pk %}">Update</a>|
+                <a href="{% url 'delete' student.pk %}">Delete</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </form>
+  </body>
+</html>

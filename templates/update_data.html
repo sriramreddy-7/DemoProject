@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Application Update Forms</title>
+  </head>
+  <style>
+    .row {
+      margin: 10px;
+      padding: 15px;
+    }
+    
+  </style>
+  <body>
+    <center>
+      <h1>Django Web App Student Update Form</h1>
+    </center>
+    <form action="{% url 'update' std.pk %}" method="POST">
+      {% csrf_token %}
+      <div class="row">
+        <label>Name</label>
+        <input type="text" name="name"  value="{{ std.name }}" placeholder="Enter Your Name" required/>
+      </div>
+      <div class="row">
+        <label>Hall Ticket No</label>
+        <input
+          type="text"
+          name="htno"
+          placeholder="Enter Your Htno"
+          value="{{ std.hallticket_no }}"
+          maxlength="10"
+          required
+        />
+      </div>
+      <div class="row">
+        <label>Year</label>
+        <input
+          type="text"
+          name="year"
+          value="{{ std.year }}"
+          placeholder="Enter Your Year of Study"
+          required
+        />
+      </div>
+      <div class="row">
+        <label>Branch</label>
+        <input
+          type="text"
+          name="branch"
+          value="{{ std.branch }}"
+          placeholder="Enter Your Branch"
+          required
+        />
+      </div>
+      <div class="row">
+        <button type="submit">Update</button>
+      </div>
+    </form>
+  </body>
+</html>
